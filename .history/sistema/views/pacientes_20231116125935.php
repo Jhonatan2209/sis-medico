@@ -121,7 +121,7 @@ if (!empty($_POST['nombres'])) {
                             <tr>
                                 <th>Fecha_Registro</th>
                                 <th>DNI</th>
-                                <th>Nombre</th>
+                                <th>Nombre completo</th>
                                 <th>Foto</th>
                                 <th>Edad</th>
                                 <th>Direccion</th>

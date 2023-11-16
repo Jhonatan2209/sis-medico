@@ -17,6 +17,8 @@ include '../../conexion.php';
         rel="stylesheet" />
 </head>
 <body>
+
+
 <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Examenes realizados</h6>
@@ -52,10 +54,9 @@ include '../../conexion.php';
         </div>
     </div>
 </body>
-
+</div>
 <script src="../package/jquery-3.6.0.min.js"></script>
 <script src="../package/dist/sweetalert2.all.js"></script>
 <script src="../package/dist/sweetalert2.all.min.js"></script>
-</div>
 <?php include '../includes/footer.php'; ?>
 </html>

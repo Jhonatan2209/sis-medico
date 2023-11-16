@@ -68,6 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+
+    <div>
+    <a href="../views/vexamenes.php"class="btn btn-success btn-lg mb-3">Ver examenes</a>
+    </div>
+    
     <div class="row justify-content-center">
         <div class="col-xl-8  col-md-8">
             <div class="card o-hidden border-0 shadow-lg my-5">
@@ -266,7 +271,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <br>
                                         <input type="submit" value="Guardar" class="btn btn-success btn-lg mb-3">
                                         <a href="./views/index.php" class="btn btn-danger btn-lg mb-3">Cancelar</a>
-                                        <a href="../views/vexamenes.php"class="btn btn-success btn-lg mb-3">Ver examenes</a>
                                     </div>
 
                                 </form>
@@ -277,14 +281,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
-                                 
 </body>
 
 <script src="../package/jquery-3.6.0.min.js"></script>
 <script src="../package/dist/sweetalert2.all.js"></script>
 <script src="../package/dist/sweetalert2.all.min.js"></script>
-
-</div>
 <?php include '../includes/footer.php'; ?>
 
 <?php

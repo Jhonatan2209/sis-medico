@@ -59,7 +59,7 @@ if ($actualsesion == null || $actualsesion == '') {
             <li class="nav-item active">
                 <a class="nav-link" href="../views/index.php">
                     <i class="fa fa-home" aria-hidden="true"></i>
-                    <span>Inicio</span></a>
+                    <span>Home</span></a>
             </li>
 
             <!-- Divider -->
