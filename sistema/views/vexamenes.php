@@ -1,10 +1,10 @@
 <?php
 include '../includes/header.php';
 include '../../conexion.php';
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +16,9 @@ include '../../conexion.php';
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet" />
 </head>
+
 <body>
-<div class="card shadow mb-4">
+    <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Examenes realizados</h6>
         </div>
@@ -30,6 +31,7 @@ include '../../conexion.php';
                             <th>NOMBRE</th>
                             <th>EDAD</th>
                             <th>FECHA</th>
+                            <th>DOCUMENTO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,12 +41,26 @@ include '../../conexion.php';
                         if ($result > 0) {
                             while ($data = mysqli_fetch_assoc($query)) { ?>
                                 <tr>
-                                    <td><?php echo $data['id']; ?></td>
-                                    <td><?php echo $data['nombre_paciente']; ?></td>
-                                    <td><?php echo $data['edad']; ?></td>
-                                    <td><?php echo $data['fecha_examen']; ?></td>                                 
+                                    <td>
+                                        <?php echo $data['id']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $data['nombre_paciente']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $data['edad']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $data['fecha_examen']; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="documento.php" class="btn btn-success ver-documento" data-id="">
+                                            <i class="far fa-file-pdf" style = "color: red;"></i> Ver Detalle
+                                        </a>
+                                    </td>
+
                                 </tr>
-                        <?php }
+                            <?php }
                         } ?>
                     </tbody>
                 </table>
@@ -58,4 +74,5 @@ include '../../conexion.php';
 <script src="../package/dist/sweetalert2.all.min.js"></script>
 </div>
 <?php include '../includes/footer.php'; ?>
+
 </html>
