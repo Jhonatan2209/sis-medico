@@ -2,7 +2,7 @@
 require 'C:/laragon/www/sis-medico/vendor/autoload.php';
 include "../../conexion.php";
 use Dompdf\Dompdf;
-$query = mysqli_query($conexion, "SELECT id, nombre_paciente, edad, fecha_examen FROM registrar_examen");
+$query = mysqli_query($conexion, "SELECT id, nombre_paciente, edad, fecha_examen FROM registrar_examen ORDER BY id");
 $result = mysqli_num_rows($query);
 
 $html = '
@@ -14,7 +14,7 @@ $html = '
         font-family: Arial, sans-serif;
     }
     h1 {
-        color: #333;
+        color: red;
         text-align: center;
     }
     table {
@@ -34,7 +34,7 @@ $html = '
 </head>
 <body>
     <h1>Documento generado</h1>
-    <p>Este es un ejemplo de un documento PDF generado desde HTML utilizando Dompdf con datos de la tabla:</p>
+    <p>Este es un ejemplo para la creacion del documento en PDF para un servicio mejorado:</p>
     <table>
         <thead>
             <tr>
@@ -56,7 +56,7 @@ $html = '
                 $html .= "</tr>";
             }
         }
-        
+
 $html .= '
         </tbody>
     </table>
