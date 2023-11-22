@@ -36,7 +36,7 @@ include '../../conexion.php';
                     </thead>
                     <tbody>
                         <?php
-                        $query = mysqli_query($conexion, "SELECT id, nombre_paciente, edad, fecha_examen FROM registrar_examen");
+                        $query = mysqli_query($conexion, "SELECT * FROM registrar_examen ORDER BY id ASC");
                         $result = mysqli_num_rows($query);
                         if ($result > 0) {
                             while ($data = mysqli_fetch_assoc($query)) { ?>
@@ -54,11 +54,11 @@ include '../../conexion.php';
                                         <?php echo $data['fecha_examen']; ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="documento.php" class="btn btn-success ver-documento" data-id="">
-                                            <i class="far fa-file-pdf" style = "color: red;"></i> Ver Detalle
+                                        <a href="documento.php?id=<?php echo $data['id'];?>"
+                                            class="btn btn-success ver-documento" target="_blank">
+                                            <i class="far fa-file-pdf" style="color: red;"></i> Ver Documento
                                         </a>
                                     </td>
-
                                 </tr>
                             <?php }
                         } ?>

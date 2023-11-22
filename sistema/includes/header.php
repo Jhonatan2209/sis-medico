@@ -117,7 +117,7 @@ if ($actualsesion == null || $actualsesion == '') {
                 <div id="collapseexamenes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../includes/registrar_examen.php">Registrar Examen</a>
-                        <a class="collapse-item" href="nuevo_permiso.php">Historial de examenes</a>
+                        <a class="collapse-item" href="../views/vexamenes.php">Historial de examenes</a>
                     </div>
                 </div>
             </li>

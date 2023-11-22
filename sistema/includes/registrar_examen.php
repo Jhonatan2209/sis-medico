@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo_examen = $_POST['tipo_examen'];
     // Preparar la consulta SQL utilizando sentencias preparadas
 
-   
+
     $query_insert = $conexion->prepare("INSERT INTO registrar_examen(nombre_paciente,edad,fecha_examen,tipo_examen,gestacion,situacion,presentacion,posicion,frecuencia_fetal,movimiento_fetal, movimiento_respiratorio, tono_muscular,dbp,cc,lf,ponderado_fetal,anatomia_fetal,espesor,madurez,arterias,venas,descripcion_cordon,pozo_mayor,ila,descripcion_liquido,ip,acm, pbf ) VALUES ('$nombre',' $edad','$fecha_formateada','$tipo_examen','$gestacion','$situacion','$presentacion','$posicion','$fciafetal','$movfetal','$movrespiratorio','$tonomuscular','$dbp','$cc','$lf','$ponderadofetal','$anatomiafetal','$espesor','$madurez','$arterias','$venas','$descripcion_cordon','$pozomayor','$ila','$descripcion_liquido','$ip','$acm','$pbf')");
-    
+
     if ($query_insert->execute()) {
         $successMessage = "Examen registrado exitosamente.";
     } else {
@@ -76,21 +76,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="p-4">
-                                <h2 class="h3 text-gray-900 mb-2 text-center">Registro de los datos del examen médico</h2>
+                                <h2 class="h3 text-gray-900 mb-2 text-center">Registro de los datos del examen médico
+                                </h2>
 
                                 <form action="" method="POST">
                                     <div>
                                         <h1 type="text" class="h5 text-gray-900 mb-2" for="nombre_paciente">Nombre del
-                                            Paciente:
-                                        </h1>
-                                        <input type="text" class="form-control" id="nombre_paciente"
-                                            name="nombre_paciente" required>
-                                    </div>                                   
+                                            Paciente existente</h1>
+                                        <select name="nombre_paciente" id="nombre_paciente" class="form-control">
+                                            <?php
+                                            $query_nombres = "SELECT nombre FROM usuario";
+                                            $result_nombres = $conexion->query($query_nombres);
+
+                                            if ($result_nombres->num_rows > 0) {
+                                                while ($row = $result_nombres->fetch_assoc()) {
+                                                    echo "<option value='" . $row["nombre"] . "'>" . $row["nombre"] . "</option>";
+                                                }
+                                            } else {
+                                                echo "<option value='' disabled selected>No hay nombres disponibles</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
                                     <div>
-                                        <h1 type="text" class="h5 text-gray-900 mb-2" for="edad">Edad: 
+                                        <h1 type="text" class="h5 text-gray-900 mb-2" for="edad">Edad
                                         </h1>
-                                        <input type="number" class="form-control" id="edad"
-                                            name="edad" required>
+                                        <input type="number" class="form-control" id="edad" name="edad" required>
                                     </div>
                                     <div>
                                         <h1 class="h5 text-gray-900 mb-2" for="fecha_examen">Fecha del Examen:</h1>
@@ -99,95 +111,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
 
                                     <div>
-                                        <h1 class="h5 text-gray-900 mb-2" for="tipo_examen">Tipo de Examen:</h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="tipo_examen">Tipo de Examen</h1>
                                         <select class="form-control" id="tipo_examen" name="tipo_examen" required>
                                             <option value="" disabled selected>Seleccione un tipo de examen</option>
                                             <option value="Ecografia">Ecografía</option>
                                             <option value="Analisis de sangre">Análisis de Sangre</option>
-                                            <option value="Control de presion">Control de Presión Arterial</option>
+                                            <!-- <option value="Control de presion">Control de Presión Arterial</option> -->
                                         </select>
                                     </div>
 
                                     <div id="dateeco1" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="gestacion">Gestación: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="gestacion">Gestación</h1>
                                         <input type="text" class="form-control" id="gestacion" name="gestacion">
                                     </div>
                                     <div id="dateeco2" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="situacion">Situación:</h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="situacion">Situación</h1>
                                         <input type="text" class="form-control" id="situacion" name="situacion">
                                     </div>
                                     <div id="dateeco3" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="presentacion">Presentación: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="presentacion">Presentación</h1>
                                         <input type="text" class="form-control" id="presentacion" name="presentacion">
                                     </div>
                                     <div id="dateeco4" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="posicion">Posición: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="posicion">Posición</h1>
                                         <input type="text" class="form-control" id="posicion" name="posicion">
                                     </div>
                                     <div id="dateeco5" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="fciafetal">Fcia. Cardiaca fetal:</h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="fciafetal">Fcia. Cardiaca fetal</h1>
                                         <input type="number" class="form-control" id="fciafetal" name="fciafetal">
                                     </div>
                                     <div id="dateeco6" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="movfetal">Mov. Fetales: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="movfetal">Mov. Fetales</h1>
                                         <input type="text" class="form-control" id="movfetal" name="movfetal">
                                     </div>
                                     <div id="dateeco7" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="movrespiratorio">Mov. Respitarios: </h1>
-                                        <input type="text" class="form-control" id="movrespiratorio" name="movrespiratorio">
+                                        <h1 class="h5 text-gray-900 mb-2" for="movrespiratorio">Mov. Respitarios</h1>
+                                        <input type="text" class="form-control" id="movrespiratorio"
+                                            name="movrespiratorio">
                                     </div>
                                     <div id="dateeco8" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="tonomuscular">Tono muscular: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="tonomuscular">Tono muscular</h1>
                                         <input type="text" class="form-control" id="tonomuscular" name="tonomuscular">
                                     </div>
                                     <div id="biometriafisica1" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="dbp">D.B.P.: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="dbp">D.B.P.</h1>
                                         <input type="text" class="form-control" id="dbp" name="dbp">
                                     </div>
                                     <div id="biometriafisica2" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="cc">C.C.: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="cc">C.C.</h1>
                                         <input type="text" class="form-control" id="cc" name="cc">
                                     </div>
                                     <div id="biometriafisica3" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="ca">C.A.: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="ca">C.A.</h1>
                                         <input type="text" class="form-control" id="ca" name="ca">
                                     </div>
                                     <div id="biometriafisica4" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="lf">L.F.: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="lf">L.F.</h1>
                                         <input type="text" class="form-control" id="lf" name="lf">
                                     </div>
                                     <div id="biometriafisica5" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="ponderadofetal">Ponderado fetal: </h1>
-                                        <input type="text" class="form-control" id="ponderadofetal" name="ponderadofetal">
+                                        <h1 class="h5 text-gray-900 mb-2" for="ponderadofetal">Ponderado fetal</h1>
+                                        <input type="text" class="form-control" id="ponderadofetal"
+                                            name="ponderadofetal">
                                     </div>
                                     <div id="biometriafisica6" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="anatomiafetal">Anatomía fetal: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="anatomiafetal">Anatomía fetal</h1>
                                         <input type="text" class="form-control" id="anatomiafetal" name="anatomiafetal">
                                     </div>
                                     <div id="biometriafisica7" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="placenta">Placenta corporal anterior: </h1>
-                                        <input type="text" class="form-control" id="espesor" name="espesor" placeholder="ESPESOR">
-                                        <input type="text" class="form-control" id="madurez" name="madurez" placeholder="MADUREZ">
+                                        <h1 class="h5 text-gray-900 mb-2" for="placenta">Placenta corporal anterior</h1>                                        </h1>
+                                        <input type="text" class="form-control" id="espesor" name="espesor"
+                                            placeholder="ESPESOR">
+                                        <input type="text" class="form-control" id="madurez" name="madurez"
+                                            placeholder="MADUREZ">
                                     </div>
                                     <div id="biometriafisica8" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="placenta">Cordon umbilical: </h1>
-                                        <input type="number" class="form-control" id="arterias" name="arterias" placeholder="ARTERIAS">
-                                        <input type="number" class="form-control" id="venas" name="venas" placeholder="VENAS">
-                                        <input type="text" class="form-control" id="descripcion_cordon" name="descripcion_cordon" placeholder="DESCRIPCION">
+                                        <h1 class="h5 text-gray-900 mb-2" for="placenta">Cordon umbilical</h1>
+                                        <input type="number" class="form-control" id="arterias" name="arterias"
+                                            placeholder="ARTERIAS">
+                                        <input type="number" class="form-control" id="venas" name="venas"
+                                            placeholder="VENAS">
+                                        <input type="text" class="form-control" id="descripcion_cordon"
+                                            name="descripcion_cordon" placeholder="DESCRIPCION">
                                     </div>
                                     <div id="biometriafisica9" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="amniotico">Liquido Amniotico(mm): </h1>
-                                        <input type="text" class="form-control" id="pozomayor" name="pozomayor" placeholder= "POZO MAYOR">
-                                        <input type="text" class="form-control" id="ila" name="ila" placeholder="INDICE LIQUIDO AMNIONITCO">
-                                        <input type="text" class="form-control" id="descripcion_liquido" name="descripcion_liquido" placeholder= "DESCRIPCION">     
+                                        <h1 class="h5 text-gray-900 mb-2" for="amniotico">Liquido Amniotico(mm)</h1>
+                                        <input type="text" class="form-control" id="pozomayor" name="pozomayor"
+                                            placeholder="POZO MAYOR">
+                                        <input type="text" class="form-control" id="ila" name="ila"
+                                            placeholder="INDICE LIQUIDO AMNIONITCO">
+                                        <input type="text" class="form-control" id="descripcion_liquido"
+                                            name="descripcion_liquido" placeholder="DESCRIPCION">
                                     </div>
                                     <div id="biometriafisica10" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="ip">Doppler de arteria umbilical: </h1>
-                                        <input type="text" class="form-control" id="ip" name="ip" placeholder="Indice de pulsatilidad(IP)">
-                                        <input type="text" class="form-control" id="acm" name="acm" placeholder="Indica de arteria cerebral media(ACM) ">
+                                        <h1 class="h5 text-gray-900 mb-2" for="ip">Doppler de arteria umbilical</h1>
+                                        <input type="text" class="form-control" id="ip" name="ip"
+                                            placeholder="Indice de pulsatilidad(IP)">
+                                        <input type="text" class="form-control" id="acm" name="acm"
+                                            placeholder="Indica de arteria cerebral media(ACM) ">
                                     </div>
                                     <div id="biometriafisica11" style="display: none;">
-                                        <h1 class="h5 text-gray-900 mb-2" for="pbf">Perfil biofísico fetal PBF rango de 1 a 10 siendo 8 el más óptimo: </h1>
+                                        <h1 class="h5 text-gray-900 mb-2" for="pbf">Perfil biofísico fetal PBF rango de
+                                            1 a 10 siendo 8 el más óptimo</h1>
                                         <input type="number" class="form-control" id="pbf" name="pbf">
                                     </div>
 
@@ -266,7 +291,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <br>
                                         <input type="submit" value="Guardar" class="btn btn-success btn-lg mb-3">
                                         <a href="./views/index.php" class="btn btn-danger btn-lg mb-3">Cancelar</a>
-                                        <a href="../views/vexamenes.php"class="btn btn-success btn-lg mb-3">Ver examenes</a>
+                                        <a href="../views/vexamenes.php" class="btn btn-success btn-lg mb-3">Ver
+                                            examenes</a>
                                     </div>
 
                                 </form>
@@ -277,7 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
-                                 
+
 </body>
 
 <script src="../package/jquery-3.6.0.min.js"></script>
@@ -316,4 +342,4 @@ if (!empty($errorMessage)) {
 }
 ?>
 
-</html> 
+</html>
